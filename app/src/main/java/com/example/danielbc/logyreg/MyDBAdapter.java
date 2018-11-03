@@ -87,15 +87,31 @@ public class MyDBAdapter {
 
         //Recorremos el cursor
         if (cursor != null && cursor.moveToFirst()) {
+            do {
+                alumnos.add("* " + cursor.getString(1) + " " + cursor.getString(2) + "\n" + cursor.getString(3) + " años, " + cursor.getString(5) + " " + cursor.getString(4) + ", Nota media: " + cursor.getString(6));
+            } while (cursor.moveToNext());
+        }
+        return alumnos;
+    }
+
+    public ArrayList<String> recuperarProfesores() {
+
+        ArrayList<String> profesores = new ArrayList<String>();
+
+        //Recuperamos en un cursor la consulta realizada
+        Cursor cursor = db.query(DATABASE_PRO, null, null, null, null, null, null);
+
+        //Recorremos el cursor
+        if (cursor != null && cursor.moveToFirst()) {
 
             do {
 
-                alumnos.add(cursor.getString(1) + " " + cursor.getString(2));
+                profesores.add("* " + cursor.getString(1) + " " + cursor.getString(2) + "\n" + cursor.getString(3) + " años, " + cursor.getString(5) + " " + cursor.getString(4) + ", Nota media: " + cursor.getString(6));
 
             } while (cursor.moveToNext());
 
         }
-        return alumnos;
+        return profesores;
     }
 
     private static class MyDbHelper extends SQLiteOpenHelper {

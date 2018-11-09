@@ -10,7 +10,7 @@ import OpenHelper.SQLite_OpenHelper;
 
 public class AlumnoProfesor extends AppCompatActivity {
 
-    private Button btAl, btPro;
+    private Button btAl, btPro, btAsig;
 
     SQLite_OpenHelper helper=new SQLite_OpenHelper(this, "BD1", null,1);
 
@@ -21,6 +21,7 @@ public class AlumnoProfesor extends AppCompatActivity {
 
         btAl = (Button) findViewById(R.id.alumno);
         btPro = (Button) findViewById(R.id.profe);
+        btAsig = (Button) findViewById(R.id.asignaturas);
 
     }
 
@@ -34,4 +35,11 @@ public class AlumnoProfesor extends AppCompatActivity {
         startActivity(p);
 
     }
+
+    public void asigPuls(View v){
+        Intent as = new Intent(getApplicationContext(), RegAsignaturas.class);
+        startActivity(as);
+
+    }
+
 }

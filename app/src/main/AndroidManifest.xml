@@ -22,7 +22,8 @@
         <activity android:name=".AlumnoProfesor" />
         <activity android:name=".RegAlumno" />
         <activity android:name=".RegProfesor" />
-        <activity android:name=".Mostrador"></activity>
+        <activity android:name=".Mostrador" />
+        <activity android:name=".RegAsignaturas"></activity>
     </application>
 
 </manifest>

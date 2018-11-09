@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import OpenHelper.SQLite_OpenHelper;
 
 public class RegAlumno extends AppCompatActivity {
     private EditText alNombre, alApellido, alEdad, alCiclo, alCurso, alMedia;
+    private Boolean existe;
 
     //SQLite_OpenHelper helper = new SQLite_OpenHelper(this, "BD1", null, 1);
     private MyDBAdapter dbAdapter;
@@ -29,11 +32,13 @@ public class RegAlumno extends AppCompatActivity {
 
         dbAdapter = new MyDBAdapter(this);
         dbAdapter.abrirBD();
+        existe = false;
 
     }
 
 
     public void bRegistroPuls(View V) {
+        existe = false;
         String nombre = alNombre.getText().toString();
         String apellido = alApellido.getText().toString();
         String edad = alEdad.getText().toString();
@@ -41,22 +46,41 @@ public class RegAlumno extends AppCompatActivity {
         String curso = alCurso.getText().toString();
         String media = alMedia.getText().toString();
 
+
         if ((nombre.compareTo("") != 0) && (apellido.compareTo("") != 0) &&
                 (edad.compareTo("") != 0) && (ciclo.compareTo("") != 0) &&
                 (curso.compareTo("") != 0) && (media.compareTo("") != 0)) {
 
+            //EXAMEN
+            //Chequear alumno
+            ArrayList<String> alumnos = dbAdapter.recuperarAlumnosNombre();
 
-            //METODO GUARDAR ALUMNO
+            for (int i = 0; i < alumnos.size(); i++) {
 
-            dbAdapter.abrirBD();
-            dbAdapter.insertarAlumno(nombre, apellido, edad, ciclo, curso, media);
-            //dbAdapter.cerrarBD();
+                String name = alumnos.get(i);
 
-            Toast creada =
-                    Toast.makeText(getApplicationContext(),
-                            "Alumno ingresado en la tabla", Toast.LENGTH_SHORT);
-            creada.show();
+                if ((nombre.compareTo(name)) == 0) {
+                    existe = true;
+                }
 
+            }
+            if (existe == false) {
+                //METODO GUARDAR ALUMNO
+                dbAdapter.abrirBD();
+                dbAdapter.insertarAlumno(nombre, apellido, edad, ciclo, curso, media);
+                //dbAdapter.cerrarBD();
+
+                Toast creada =
+                        Toast.makeText(getApplicationContext(),
+                                "Alumno ingresado en la tabla", Toast.LENGTH_SHORT);
+                creada.show();
+            } else {
+                Toast error =
+                        Toast.makeText(getApplicationContext(),
+                                "Usuario existente", Toast.LENGTH_SHORT);
+
+                error.show();
+            }
         } else {
 
             Toast error =

@@ -24,6 +24,14 @@
 
     </ScrollView>
 
+    <EditText
+        android:id="@+id/etBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="BUSCAR" />
+
     <Button
         android:id="@+id/alTodo"
         android:layout_margin="5dp"
@@ -65,14 +73,14 @@
         android:onClick="proTodoPuls"/>
 
     <Button
-        android:id="@+id/alproTodo"
+        android:id="@+id/ASGbtn"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Todo"
+        android:text="Asignaturas"
         android:background="@color/btColor"
-        android:onClick="alproTodoPuls"/>
+        android:onClick="ASGPuls"/>
 
 
 </LinearLayout>
